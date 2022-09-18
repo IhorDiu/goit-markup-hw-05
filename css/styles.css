@@ -24,7 +24,7 @@
     --color-active-portfolio-btn: #FFFFFF;
     --color-header-border-bottom: #ECECEC;
     --color-porfolio-skills-border: #EEEEEE;
-    --transition-dur-and-func: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-dur-and-func: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 h1, h2, h3, p {
@@ -39,11 +39,6 @@ ul {
 }
 
 .link {
-    transition: color var(--transition-dur-and-func),
-            background-color var(--transition-dur-and-func),
-            box-shadow var(--transition-dur-and-func),
-            border var(--transition-dur-and-func);
-
     text-decoration: none;
     padding: 0;
     margin: 0;
@@ -144,6 +139,8 @@ h2, h3, .menu-link {
 
 .menu-link, .contact-link-mail,
 .contact-link-tel {
+    transition: color var(--transition-dur-and-func);
+
     display: flex;
     padding-top: 32px;
     padding-bottom: 32px;
@@ -267,7 +264,7 @@ h2, h3, .menu-link {
     color: var(--primary-text-color-theme-dark);
 }
 
-.button {
+.button-hero {
     font-weight: 700;
     font-size: 16px;
     line-height: 1.88;
@@ -289,13 +286,11 @@ h2, h3, .menu-link {
         /* height: 50px; */
     margin: auto;
 
-    transition: color var(--transition-dur-and-func),
-            background-color var(--transition-dur-and-func),
-            box-shadow var(--transition-dur-and-func);
+    transition: background-color var(--transition-dur-and-func);
 }
 
-.button:hover,
-.button:focus {
+.button-hero:hover,
+.button-hero:focus {
     background-color: var(--background-color-active-main-btn);
 }
 
@@ -443,6 +438,7 @@ h2, h3, .menu-link {
     border-radius: 50%;
     background-color: var(--backgroud-color-social-link);
 
+    transition: background-color var(--transition-dur-and-func);
 }
 
 .social-list-link:hover,
@@ -476,6 +472,8 @@ h2, h3, .menu-link {
 
 
 .clients-list-link {
+    transition: border-color var(--transition-dur-and-func);
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -495,7 +493,7 @@ h2, h3, .menu-link {
 
 .clients-list-link:hover,
 .clients-list-link:focus {
-    border: 1px solid var(--accent-color);
+    border-color: var(--accent-color);
 }
 
 .clients-list-link:hover .clients-list-icon,
@@ -549,10 +547,14 @@ h2, h3, .menu-link {
 }
 
 .footer-address {
-        color: var(--primary-text-color-theme-dark);
+    transition: color var(--transition-dur-and-func);
+
+    color: var(--primary-text-color-theme-dark);
 }
 .footer-link {
-        color: var(--footer-link-text-color);
+    transition: color var(--transition-dur-and-func);
+
+    color: var(--footer-link-text-color);
 }
 
 /* ===================Subscribe=================== */
@@ -576,6 +578,8 @@ h2, h3, .menu-link {
  }
 
  .footer-social-list-link {
+    transition: background-color var(--transition-dur-and-func);
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -603,15 +607,13 @@ h2, h3, .menu-link {
 /* ===================Backdrop======================= */
 
 .backdrop.is-hidden {
-    animation: back 1500ms cubic-bezier(0.4, 0, 0.2, 1) alternate;
-
+    
     visibility: hidden;
     opacity: 0;
-    pointer-events: none;
+    pointer-events: auto;
     
-    
-    
-}
+    animation: close-modal 2500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
 .backdrop {
     position: fixed;
@@ -621,23 +623,21 @@ h2, h3, .menu-link {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
-    
-    animation: zoom 1500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 
-    /* animation: zoom 2s ease-in-out 0.5s alternate; */
-      
+    animation: open-modal 2500ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* animation: open-modal 2500ms cubic-bezier(0.4, 0, 0.2, 1); */
+    /* animation: close-modal 2500ms cubic-bezier(0.4, 0, 0.2, 1) reverse; */
     
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
     
     
-    /* transition: opacity 500ms ease, visibility 500ms ease; */
+    /* transition: opacity 2500ms ease, visibility 2500ms ease; */
 }
 
-
 .modal {
-       
     position: absolute;
     top: 50%;
     left: 50%;
@@ -651,8 +651,7 @@ h2, h3, .menu-link {
                 0px 1px 1px rgba(0, 0, 0, 0.14),
                 0px 2px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-   
-    }
+}
 
 .modal-close-icon {
     width: 18px;
@@ -674,9 +673,10 @@ h2, h3, .menu-link {
     background-color: transparent;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 0;
+       
 }
 
-@keyframes zoom {
+@keyframes open-modal {
     0% {
         transform: scale(0.2);
     }
@@ -685,13 +685,13 @@ h2, h3, .menu-link {
     }
     100% {
         transform: scale(1.0);
-    }
+    }    
 }
 
-@keyframes back {
+@keyframes close-modal {
     100% {
-            transform: scale(1.0);
-        }
+        transform: scale(1.0);
+    }
     
     50% {
         transform: scale(1.2);
